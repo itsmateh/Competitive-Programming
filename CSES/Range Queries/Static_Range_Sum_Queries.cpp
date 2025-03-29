@@ -14,7 +14,8 @@ typedef tree<int,null_type,less<int>,rb_tree_tag, tree_order_statistics_node_upd
 #define pb push_back
 #define mp make_pair
 #define endl "\n";
- 
+
+
 int main(){
     FIN;
  
@@ -35,3 +36,6 @@ int main(){
  
     return 0; 
 }
+ 
+ 
+ 

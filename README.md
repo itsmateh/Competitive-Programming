@@ -1,4 +1,4 @@
-# Competitive Programming solutions
+# Competitive Programming Solutions
 Some competitive programming problem solutions !!
 
 

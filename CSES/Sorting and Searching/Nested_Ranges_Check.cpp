@@ -25,45 +25,42 @@ typedef tree<int,null_type,less<int>,rb_tree_tag, tree_order_statistics_node_upd
 #define sz(x) (int)(x).size()
 #define esta(x, c) ((c).find(x) != (c).end())
 
-
-struct rango{
-    int left, right, index; 
-    bool operator < (const rango &otro) const{
-        if(left == otro.left) return right > otro.right;
-        return left < otro.left; 
-    }
-};
-
 int main() {
     FIN;
     int n; cin >> n; 
 
     vb ans1(n, 0);  
     vb ans2(n, 0); 
-    vector<rango> rangos(n);
+    vector<tuple<int, int, int>> rangos(n); // {left, right, index}
 
     forn(i,n){
-        cin >> rangos[i].left; 
-        cin >> rangos[i].right; 
-        rangos[i].index = i; 
+        int l, r;
+        cin >> l >> r;
+        rangos[i] = make_tuple(l, r, i);
     }
 
-    sort(rangos.begin(), rangos.end()); 
+    sort(rangos.begin(), rangos.end(), [](const auto &a, const auto &b) {
+        if (get<0>(a) == get<0>(b)) return get<1>(a) > get<1>(b);
+        return get<0>(a) < get<0>(b);
+    });
 
     int minR = 1e9+50;
     dforn(i,n){
-        if(rangos[i].right >= minR)
-            ans1[rangos[i].index] = 1; 
-        minR = min(minR, rangos[i].right);
+        int r = get<1>(rangos[i]);
+        int idx = get<2>(rangos[i]);
+        if (r >= minR)
+            ans1[idx] = 1; 
+        minR = min(minR, r);
     }
   
     int maxR = 0; 
     forn(i,n){
-        if(rangos[i].right <= maxR)
-            ans2[rangos[i].index] = 1;
-        maxR = max(maxR, rangos[i].right); 
+        int r = get<1>(rangos[i]);
+        int idx = get<2>(rangos[i]);
+        if (r <= maxR)
+            ans2[idx] = 1;
+        maxR = max(maxR, r); 
     }
-
 
     forn(i,n) cout << ans1[i] << " ";
     cout << endl;

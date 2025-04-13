@@ -30,6 +30,8 @@ typedef tree<pair<int, int>, null_type, less<pair<int, int>>, rb_tree_tag,tree_o
 bool compare(pii &f, pii &s){return f.second < s.second;}
  
 int main() {
+   FIN; 
+
    int n, k; cin >> n >> k; 
    vector<pii>hs(n); 
    forn(i,n) cin >> hs[i].first >> hs[i].second; 
@@ -52,4 +54,6 @@ int main() {
       ans++;
    }
    cout << ans << endl;
+   
+   return 0; 
 }
